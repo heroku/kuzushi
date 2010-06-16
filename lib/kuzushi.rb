@@ -391,7 +391,8 @@ class Kuzushi
 
   def shell(cmd)
     log "# #{cmd}"
-    Kernel.system cmd ## FIXME - need to handle/report exceptions here
+    Kernel.system cmd
+    raise "Command #{cmd} failed with exit code #{$?.to_i}" unless $?.success?
   end
 
   def init?
